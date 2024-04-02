@@ -239,8 +239,8 @@ void Partition::P_Maintenance(double anchor, int k, vector<double>followers)
 	for (int i = 0; i < followers.size(); i++)
 	{
 		double u = followers[i];
-		coreness[u]++;
 		coreness_ins[coreness[u]]++;
+		coreness[u]++;
 		for (double j = 0; j < datagraph->AdjList[u].size(); j++)
 		{
 			double v = datagraph->AdjList[u][j];
