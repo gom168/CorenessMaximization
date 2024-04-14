@@ -34,7 +34,7 @@ public:
 
 	Master(Partition* partition);
 
-	void Anchoring(int b, int pre, int modes, string check_dat);
+	void Anchoring(int b, int modes, string check_dat);
 
 	vector<double> GroupSelection(int b, vector<pair<double, int>>& followers_final, int& group_costs, int& group_followers, double& max_score, vector<pair<double, double>>& group_insert_edges, unordered_map<double, pair<int, int>>& group_anchor_cost);
 
@@ -47,11 +47,11 @@ public:
 
 	void ShrinkGroups(double v, unordered_map<double, int>& degplus, unordered_map<double, int>& Status, unordered_map<double, int>vis_group, unordered_map<double, int>& Survive, unordered_map<double, double>& mp_vis);
 
-	pair<double, int> getAnchorScore(int pre, int b, double& node_score, int& node_followers, int& node_cost, vector<double>& final_followers);
+	pair<double, int> getAnchorScore(int b, double& node_score, int& node_followers, int& node_cost, vector<double>& final_followers);
 
 	bool compareCoreness(const double& a, const double& b);
 
-	void Anchor_compute(int pre);
+	void Anchor_compute();
 
 	void collectFollowers_vertex(double anchor, vector<double>& followers_i);
 

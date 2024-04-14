@@ -14,7 +14,7 @@ Master::Master(Partition* partition)
 }
 
 
-void Master::Anchoring(int b, int pre, int modes, string check_dat)
+void Master::Anchoring(int b, int modes, string check_dat)
 {
 	double t_begin = (double)clock();
 	partition->P_Decomposition();
@@ -30,7 +30,7 @@ void Master::Anchoring(int b, int pre, int modes, string check_dat)
 		pair<double, int> ans = {-1,0};
 		if (modes != 1)
 		{
-			ans = getAnchorScore(pre, b, node_score, node_followers, node_cost, final_followers);
+			ans = getAnchorScore(b, node_score, node_followers, node_cost, final_followers);
 		}
 		double vertex_end = (double)clock();
 		vertex_anchor_time += vertex_end - vertex_begin;
@@ -52,10 +52,6 @@ void Master::Anchoring(int b, int pre, int modes, string check_dat)
 		if (node_score > max_score)
 		{
 			if (ans.first == -1) { break; }
-			if (pre)
-			{
-				if (partition->deggt[ans.first] - partition->coreness[ans.first] == ndeggt)ndeggt++; 
-			}
 			acost += node_cost;
 			nfs += node_followers;
 			int tok = ans.second;
@@ -246,17 +242,13 @@ void Master::Anchoring(int b, int pre, int modes, string check_dat)
 }
 
 
-void Master::Anchor_compute(int pre)
+void Master::Anchor_compute()
 {
 	followers.clear();
 	int cnt = 0;
 	for (double i = 0; i < partition->datagraph->AdjList.size(); i++)
 	{
 		followers.push_back(vector<double>());
-		if (pre)
-		{
-			if (partition->deggt[i] - partition->coreness[i] > ndeggt || partition->deggt[i] - partition->coreness[i] < 0)continue;
-		}
 		cnt++;
 		collectFollowers_vertex(i, followers[i]);
 	}
@@ -379,7 +371,7 @@ void Master::ShrinkVertex(double v, unordered_map<double, int>& degplus, unorder
 	}
 }
 
-pair<double, int> Master::getAnchorScore(int pre, int b, double& node_score, int& node_followers, int& node_cost, vector<double>& final_followers)
+pair<double, int> Master::getAnchorScore(int b, double& node_score, int& node_followers, int& node_cost, vector<double>& final_followers)
 {
 	//ofstream out("output/Master.txt", ios::app);
 	double anchor = INITIAL;
@@ -389,10 +381,6 @@ pair<double, int> Master::getAnchorScore(int pre, int b, double& node_score, int
 	for (double i = 0; i < partition->datagraph->AdjList.size(); i++)
 	{
 		vector<double>followers_g;
-		if (pre)
-		{
-			if (partition->deggt[i] - partition->coreness[i] > ndeggt || partition->deggt[i] - partition->coreness[i] < 0)continue;
-		}
 		collectFollowers_vertex(i, followers_g);
 		sort(followers_g.begin(), followers_g.end(), compareDegree);
 		int posk = followers_g.size() - 1;

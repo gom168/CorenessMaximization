@@ -28,8 +28,7 @@ int main(int argc, char* argv[])
 	Partition partition(&datagraph);
 	string chec_dat = argv[3];
 	int check = atoi(argv[4]);
-	int pre = atoi(argv[5]);
-	int mode = atoi(argv[6]);
+	int mode = atoi(argv[5]);
 	if (check==1)
 	{
 		partition.coreDecomposition();
@@ -42,7 +41,7 @@ int main(int argc, char* argv[])
 		cout << "Loaded dataset successfully!" << endl;
 		int b;
 		b = atoi(argv[2]);
-		master.Anchoring(b, pre, mode, chec_dat);
+		master.Anchoring(b, mode, chec_dat);
 		cout << "Number of Followers:" << master.nfs << endl;
 	}
 	else if(check==2)
