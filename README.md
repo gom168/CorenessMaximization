@@ -9,7 +9,7 @@ This is the source code of our paper "Coreness Maximization: An Edge Insertion M
 ## Compile
 
 ```shell
-cd CoreMaximization
+cd CorenessMaximization
 cmake .
 make
 ```
