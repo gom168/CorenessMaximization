@@ -21,7 +21,6 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	//cout << "** Master node is setting up PGAC..." << endl;
 	cout << "dataset: ";
 	string dataset = argv[1];
 	DataGraph datagraph(dataset);

@@ -258,7 +258,7 @@ void Master::Anchor_compute()
 
 void Master::collectFollowers_vertex(double anchor, vector<double>& followers_i)
 {
-	priority_queue<pair<double, double>, vector<pair<double, double>>, greater<pair<double, double>> > H; // 1 为优先级 core+ 0.1 layer 2为顶点
+	priority_queue<pair<double, double>, vector<pair<double, double>>, greater<pair<double, double>> > H; 
 	unordered_map<double, int>degplus;
 	double num_N = partition->max_layer + 100.0;
 	H.push({ partition->coreness[anchor] * 1.0 + partition->shells[anchor] * 1.0 / num_N, anchor });
