@@ -15,13 +15,13 @@ do
     for mode in ${mode_list[@]}
     do
         if [[ $mode -eq 0 ]]; then
-            model_name="VS"
+            model_name="LCGI"
         fi
         if [[ $mode -eq 1 ]]; then
-            model_name="GS"
+            model_name="GCGI"
         fi
         if [[ $mode -eq 2 ]]; then
-            model_name="VGB"
+            model_name="LGB"
         fi
         insert_dir="./output/$dataset/insert_b=${b}_mode=${mode}_.txt"
         (/usr/bin/time -v nohup ./CoreMaximization $data_dir $b $insert_dir $verify $mode &) >&  ./output/$dataset/${dataset}_exp_b=${b}_model=${model_name}.txt
